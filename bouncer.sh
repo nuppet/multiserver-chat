@@ -1,5 +1,7 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/env bash
 
+sic_dir=~/bin/
+irc_server="localhost"
 basedir=~/src/chat/
 secret_file=${basedir}secrets
 chat_file_prefix=${basedir}user-
@@ -12,7 +14,7 @@ while read -ra message; do
 		continue
 	fi
 
-	my_name=$(awk "$2 ~ /^${secret}$/ {print \$1}" "${secret_file}" 2> /dev/null)
+	my_name=$(awk "\$2~/^${secret}$/ {print \$1}" "${secret_file}" 2> /dev/null)
 
 	chat_pid_file="${chat_file_prefix}${my_name}-pid"
 
@@ -43,11 +45,14 @@ for process_file in $(ls ${basedir}user-*-pid* 2> /dev/null); do
 done
 
 if [ ! -e "${chat_pid_file}" ]; then
-	~/bin/sic -n "${my_name}" > "${chat_out}"  <> "${chat_in}" & # 2> /dev/null &
+	${sic_dir}sic -h ${irc_server} -n "${my_name}" > "${chat_out}"  <> "${chat_in}" & # 2> /dev/null &
 	chat_pid="${!}"
 	echo "${chat_pid}" > "${chat_pid_file}"
 	chat_running=$(ps | awk "\$1~/^${chat_pid}\$/" | wc -l)
 	if [ "${chat_running}" != 1 ]; then
+		rm "${chat_pid_file}"
+		rm "${chat_in}"
+		rm "${chat_out}"
 		exit
 	fi
 fi
