@@ -58,7 +58,7 @@ function setup() {
 	ws.onopen = function(e) {
 		console.log("Multi server chat connection established");
 		ws.send("test"); // password
-		ws.send("/join + mainChannel + "," + discordChannel);
+		ws.send("/join " + mainChannel + "," + discordChannel);
 	};
 
 	msglog = [];
@@ -103,7 +103,7 @@ function print(msg) {
 	if (SWAM == undefined)
 		console.log(msg);
 
-	UI.addChatMessage(UI.escapeHTML(msg);
+	UI.addChatMessage(UI.escapeHTML(msg));
 }
 
 // External commands
