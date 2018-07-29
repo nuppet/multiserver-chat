@@ -27,7 +27,14 @@ In js console try:
 3. Start the bouncer: `websocketd --port 8586 ./bouncer.sh`
 4. Configure TLS proxy.
 
+
 ## Theory of operation
+
+### Servers and ports
+
+Web client connects to `public-server:forwarding-port` and is proxied to `localhost:websocketd-port` which connects to `irc-server:irc-port`.
+
+### Programs
 
 After the extension is loaded by StarMash, the browser initiates a websocket connection to `websocketd`.
 `websocketd`, much like CGI, starts a process of `bouncer.sh` for each websocket connection.
