@@ -6,6 +6,11 @@ Multiserver Chat is an external back channel chat extension for StarMash.
 
 Configure and then place ws-chat-bridge.js on the web. Direct StarMash to load this file as an extension.
 
+In js console try:
+
+    bouncerServer = "wss://server:port"
+    setup()
+
 ## Server side usage
 
 ### Prerequisites

@@ -1,5 +1,6 @@
 // Multi Server Chat
 
+bouncerServer = "ws://100.115.92.2:9595"
 discordChannel = "#in-game-related"
 mainChannel = "#general"
 usersOnline = null;
@@ -52,7 +53,7 @@ function parse(line) {
 }
 
 function setup() {
-	ws = new WebSocket("ws://100.115.92.2:9595");
+	ws = new WebSocket(bouncerServer);
 
 	ws.onopen = function(e) {
 		console.log("Multi server chat connection established");
@@ -152,5 +153,6 @@ function help() {
 
 // Go!
 
-setup();
+// bouncerServer = "wss://server:port""
+// setup();
 
