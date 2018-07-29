@@ -56,10 +56,10 @@ echo "${$}" > "${chat_pid_file}.${$}"
 tail -f "${chat_out}" --pid "${$}" &
 while IFS= read -r line; do
 	linenospaces=${line// /}
-	if [[ "${linenospaces,,*}" =~ ^/quit ]]; then
+	if [[ "${linenospaces,,*}" =~ ^:quit ]]; then
 		break
 	fi
-	if [[ "${linenospaces,,*}" =~ ^/nick ]]; then
+	if [[ "${linenospaces,,*}" =~ ^:nick ]]; then
 		continue
 	fi
 	printf '%s\n' "$line"

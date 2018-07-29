@@ -58,7 +58,7 @@ function setup() {
 	ws.onopen = function(e) {
 		console.log("Multi server chat connection established");
 		ws.send("test"); // password
-		ws.send("/join " + mainChannel + "," + discordChannel);
+		ws.send(":join " + mainChannel + "," + discordChannel);
 	};
 
 	msglog = [];
@@ -86,13 +86,13 @@ let teamChannel = null;
 function reTeam(newTeamChannel) {
 	if (game.myTeam == game.myID) {
 		if (teamChannel != null) {
-			ws.send("/part " + teamChannel);
+			ws.send(":part " + teamChannel);
 			teamChannel = null;
 		}
 	}
 	let newTeamChannel = "#" + game.playHost + game.playPath + game.myTeam;
-	ws.send("/part " + teamChannel);
-	ws.send("/join " + newTeamChannel);
+	ws.send(":part " + teamChannel);
+	ws.send(":join " + newTeamChannel);
 	teamChannel = newTeamChannel;
 }
 
@@ -109,25 +109,25 @@ function print(msg) {
 // External commands
 
 function discordChat(msg) {
-	ws.send("/m " + discordChannel + " " + msg);
+	ws.send(":m " + discordChannel + " " + msg);
 }
 
 function pubChat(msg) {
-	ws.send("/m " + mainChannel + " " + msg);
+	ws.send(":m " + mainChannel + " " + msg);
 }
 
 function teamChat(msg, inGameName) {
-	ws.send("/m " + teamChannel + " " + inGameName + ": "+ msg);
+	ws.send(":m " + teamChannel + " " + inGameName + ": "+ msg);
 }
 
 function whisper(name, msg) {
-	ws.send("/m " + name + " " + msg);
+	ws.send(":m " + name + " " + msg);
 }
 
 function names() {
-	ws.send("/names " + mainChannel);
+	ws.send(":names " + mainChannel);
 	if (teamChannel != null) {
-		ws.send("/names " + teamChannel);
+		ws.send(":names " + teamChannel);
 	}
 }
 
