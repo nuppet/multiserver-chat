@@ -16,7 +16,7 @@ In js console try:
 ### Prerequisites
 
 1. `websocketd` provides CGI but for websockets.
-2. `sic` provides the IRC connection. Configure the default server.
+2. `sic` provides the IRC connection.
 3. `miniircd` or any IRC server.
 4. `nginx` or any proxy that can provide TLS for `websocketd` unless you want to give `websocketd` your private key.
 
@@ -24,6 +24,7 @@ In js console try:
 
 1. Run `miniircd` or any IRC server.
 2. Create a user: `echo 'username password' >> secrets`
+3. Edit `bouncer.sh` to configure it. Default IRC server is `localhost:6667`.
 3. Start the bouncer: `websocketd --port 8586 ./bouncer.sh`
 4. Configure TLS proxy.
 
