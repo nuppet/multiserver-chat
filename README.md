@@ -15,10 +15,10 @@ In js console try:
 
 ### Prerequisites
 
-1. `websocketd` provides CGI but for websockets.
-2. `sic` provides the IRC connection.
-3. `miniircd` or any IRC server.
-4. `nginx` or any proxy that can provide TLS for `websocketd` unless you want to give `websocketd` your private key.
+1. `[websocketd](http://websocketd.com/)` provides CGI but for websockets.
+2. `[sic](https://tools.suckless.org/sic/)` provides the IRC connection.
+3. `[miniircd](https://github.com/jrosdahl/miniircd)` or any IRC server.
+4. `[nginx](https://www.nginx.com/)` or any proxy that can provide TLS for `websocketd` unless you want to give `websocketd` your private key.
 
 ### Running multiserver-chat
 
@@ -39,4 +39,71 @@ Web client connects to `public-server:forwarding-port` and is proxied to `localh
 After the extension is loaded by StarMash, the browser initiates a websocket connection to `websocketd`.
 `websocketd`, much like CGI, starts a process of `bouncer.sh` for each websocket connection.
 `bouncer.sh` uses `sic` to connect to an IRC server.
+
+#### IRC Server
+
+The IRC server just needs to work as a normal IRC server.
+This should be exclusive to the back channel because all authentication is prior to connecting.
+
+#### `bouncer.sh`
+
+Performs password based authentication.
+Marries a websocket connection to a new or existing IRC session.
+One user can connect multiple times.
+Receives all input from user, blocks nick changing, but passes everything else to `sic`.
+Sends all output to user.
+
+#### `ws-chat-bridge.js`
+
+This is the user interface. Only shows a subset of messages and attempts to parse them. See javascript console.
+
+#### `websocketd`
+
+Simply pipes STDIN and STDOUT through websockets.
+Each connection is a new process.
+
+#### nginx TLS proxy
+
+Proxy from chat.example.com:webserver-port to localhost:websocketd-port.
+
+````
+server {
+
+  listen <webserver-port> ssl;
+  server_name chat.example.com;
+
+  ssl_certificate /etc/letsencrypt/live/chat.example.com/fullchain.pem; # managed by Certbot
+  ssl_certificate_key /etc/letsencrypt/live/chat.example.com/privkey.pem; # managed by Certbot
+  include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+  location / {
+    proxy_pass  http://localhost:<websocketd-port>;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+
+    # Timeout configuration.
+    # proxy_redirect off;
+
+    proxy_connect_timeout       300;
+    proxy_send_timeout        86400;
+    proxy_read_timeout        86400;
+  }
+}
+````
+
+#### `sic`
+
+A simple IRC client. It's a step up from netcat. Try it from the command line:
+
+````
+$ rlwrap sic
+:join #starmash
+:s #starmash
+hello world!
+:quit
+````
 
