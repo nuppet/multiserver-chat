@@ -1,10 +1,7 @@
 // Multi Server Chat
 
-// TODO
-// SWAM
-// MOTD
-
-mainChannel = "#in-game-related"
+discordChannel = "#in-game-related"
+mainChannel = "#general"
 usersOnline = null;
 
 function parse(line) {
@@ -59,8 +56,8 @@ function setup() {
 
 	ws.onopen = function(e) {
 		console.log("Multi server chat connection established");
-		ws.send("test");
-		ws.send("/join #in-game-related");
+		ws.send("test"); // password
+		ws.send("/join + mainChannel + "," + discordChannel);
 	};
 
 	msglog = [];
@@ -88,13 +85,13 @@ let teamChannel = null;
 function reTeam(newTeamChannel) {
 	if (game.myTeam == game.myID) {
 		if (teamChannel != null) {
-			ws.send("/part #" + teamChannel);
+			ws.send("/part " + teamChannel);
 			teamChannel = null;
 		}
 	}
-	let newTeamChannel = game.playHost + game.playPath + game.myTeam;
-	ws.send("/part #" + teamChannel);
-	ws.send("/join #" + newTeamChannel);
+	let newTeamChannel = "#" + game.playHost + game.playPath + game.myTeam;
+	ws.send("/part " + teamChannel);
+	ws.send("/join " + newTeamChannel);
 	teamChannel = newTeamChannel;
 }
 
@@ -110,12 +107,16 @@ function print(msg) {
 
 // External commands
 
+function discordChat(msg) {
+	ws.send("/m " + discordChannel + " " + msg);
+}
+
 function pubChat(msg) {
-	ws.send("/m #in-game-related " + msg);
+	ws.send("/m " + mainChannel + " " + msg);
 }
 
 function teamChat(msg, inGameName) {
-	ws.send("/m #" + teamChannel + " " + inGameName + ": "+ msg);
+	ws.send("/m " + teamChannel + " " + inGameName + ": "+ msg);
 }
 
 function whisper(name, msg) {
@@ -123,9 +124,9 @@ function whisper(name, msg) {
 }
 
 function names() {
-	ws.send("/names #in-game-related");
+	ws.send("/names " + mainChannel);
 	if (teamChannel != null) {
-		ws.send("/names #" + teamChannel);
+		ws.send("/names " + teamChannel);
 	}
 }
 
@@ -140,6 +141,7 @@ function help() {
 
 // SWAM
 
+// discordChat "//d "
 // teamChat "//t "   0,4 4-
 // whisper  "//{w,m} "   0,4 4-
 // whisper  "//pm "   0,5 5-
