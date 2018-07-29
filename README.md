@@ -15,10 +15,10 @@ In js console try:
 
 ### Prerequisites
 
-1. `(websocketd)[http://websocketd.com/]` provides CGI but for websockets.
-2. `(sic)[https://tools.suckless.org/sic/]` provides the IRC connection.
-3. `(miniircd)[https://github.com/jrosdahl/miniircd]` or any IRC server.
-4. `(nginx)[https://www.nginx.com/]` or any proxy that can provide TLS for `websocketd` unless you want to give `websocketd` your private key.
+1. [websocketd](http://websocketd.com/) provides CGI but for websockets.
+2. [sic](https://tools.suckless.org/sic/) provides the IRC connection.
+3. [miniircd](https://github.com/jrosdahl/miniircd) or any IRC server.
+4. [nginx](https://www.nginx.com/) or any proxy that can provide TLS for `websocketd` unless you want to give `websocketd` your private key.
 
 ### Running multiserver-chat
 
