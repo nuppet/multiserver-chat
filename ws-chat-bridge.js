@@ -23,7 +23,7 @@ function parse(line) {
 	if (msg == null)
 		return line;
 
-	// with a regex's above
+	// with a regex above
 	// msg[3]    == "><" indicates a server message
 	// msg[3][0] == "<" indicates a chat message
 	if (msg[3] == "><") {
