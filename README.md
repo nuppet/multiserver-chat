@@ -1,10 +1,18 @@
 # multiserver-chat
 
-Multiserver Chat is an external back channel chat extension for StarMash.
+Multiserver Chat (MSC) is an external back channel chat extension for StarMash.
+When loaded, MSC works like a party line.
+It also attempts to emulate team chat.
+And, because it uses an IRC server, can benefit from IRC features like bots and services.
+
+StarMash is a javascript modification to [AirMash](https://airma.sh).
 
 ## Client side usage
 
-Configure and then place ws-chat-bridge.js on the web. Direct StarMash to load this file as an extension.
+Configure ws-chat-bridge.js and then place it on the web.
+Direct StarMash to load this file as an extension.
+
+### Client side development
 
 In js console try:
 
@@ -53,18 +61,24 @@ One user can connect multiple times.
 Receives all input from user, blocks nick changing, but passes everything else to `sic`.
 Sends all output to user.
 
+Any changes made to this file will be effective on the next websocket connection.
+
 #### `ws-chat-bridge.js`
 
 This is the user interface. Only shows a subset of messages and attempts to parse them. See javascript console.
+
+Any changes made to this file will be effective next time it is reloaded by the browser.
 
 #### `websocketd`
 
 Simply pipes STDIN and STDOUT through websockets.
 Each connection is a new process.
 
-#### nginx TLS proxy
+#### TLS proxy
 
 Proxy from chat.example.com:webserver-port to localhost:websocketd-port.
+
+Example nginx config:
 
 ````
 server {
