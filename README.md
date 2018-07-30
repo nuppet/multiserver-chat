@@ -3,7 +3,7 @@
 Multiserver Chat (MSC) is an external back channel chat extension for StarMash.
 When loaded, MSC works like a party line.
 It also attempts to emulate team chat.
-And, because it uses an IRC server, can benefit from IRC features like bots and services.
+Because it uses an IRC server, it can benefit from IRC features like bots and services.
 
 StarMash is a javascript modification to [AirMash](https://airma.sh).
 
