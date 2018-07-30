@@ -26,11 +26,6 @@ while read -ra message; do
 	break
 done
 
-chat_in="${chat_file_prefix}${my_name}-in"
-chat_out="${chat_file_prefix}${my_name}-out"
-
-[ -p "${chat_in}" ] || mkfifo "${chat_in}"
-
 # Delete any stray PID files
 for process_file in $(ls ${basedir}user-*-pid* 2> /dev/null); do
 	check_pid=$(cat "${process_file}")
@@ -43,6 +38,11 @@ for process_file in $(ls ${basedir}user-*-pid* 2> /dev/null); do
 		rm "${process_file}"
 	fi
 done
+
+chat_in="${chat_file_prefix}${my_name}-in"
+chat_out="${chat_file_prefix}${my_name}-out"
+
+[ -p "${chat_in}" ] || mkfifo "${chat_in}"
 
 if [ ! -e "${chat_pid_file}" ]; then
 	${sic_dir}sic -h ${irc_server} -n "${my_name}" > "${chat_out}"  <> "${chat_in}" & # 2> /dev/null &

@@ -1,4 +1,8 @@
-// Multi Server Chat
+// db db     m     _ dMMb                     dMMb m
+// MMmMM     M  m  " M                        M    M        m
+// M Y M m m M dMb m YMMb mmm Mmm m m mmm Mmm M    Mmm mmm dMb
+// M   M M M M  M  M    M Mm  M   M M Mm  M   M    M M MmM  M
+// M   M MMM M  M  M dMMP Mmm M    M  Mmm M   YMMP M M M M  M
 
 bouncerServer = "ws://100.115.92.2:9595"
 discordChannel = "#in-game-related"
