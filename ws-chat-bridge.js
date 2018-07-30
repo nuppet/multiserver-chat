@@ -1,8 +1,8 @@
-// db db     m     _ dMMb                     dMMb m
-// MMmMM     M  m  " M                        M    M        m
-// M Y M m m M dMb m YMMb mmm Mmm m m mmm Mmm M    Mmm mmm dMb
-// M   M M M M  M  M    M Mm  M   M M Mm  M   M    M M MmM  M
-// M   M MMM M  M  M dMMP Mmm M    M  Mmm M   YMMP M M M M  M
+// db db     m         dMMb                     dMMb m
+// MMmMM     M  m      M                        M    M        m
+// M Y M m m M dMb mmm YMMb mmm Mmm m m mmm Mmm M    Mmm mmm dMb
+// M   M M M M  M   M     M Mm  M   M M Mm  M   M    M M MmM  M
+// M   M MMM M  M  mMm dMMP Mmm M    M  Mmm M   YMMP M M M M  M
 
 bouncerServer = "ws://100.115.92.2:9595"
 discordChannel = "#in-game-related"
@@ -23,7 +23,7 @@ function parse(line) {
 	if (msg == null)
 		return line;
 
-	// with the regex's above
+	// with a regex's above
 	// msg[3]    == "><" indicates a server message
 	// msg[3][0] == "<" indicates a chat message
 	if (msg[3] == "><") {
