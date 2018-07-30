@@ -112,6 +112,10 @@ function print(msg) {
 
 // External commands
 
+// Most of these commands are handled by `sic`, like `:names` and `:m`
+// `sic` sends commands it doesn't know straight to the IRC server, like
+// `:motd` or `:privmsg #general :hello world!`
+
 function discordChat(msg) {
 	ws.send(":m " + discordChannel + " " + msg);
 }
@@ -129,6 +133,10 @@ function whisper(name, msg) {
 }
 
 function names() {
+	// discordChannel: shouldn't matter who is there
+	// teamChannel: show who is on team
+	// mainChannel: show who is online
+	// but may be wrong in case of `raw(":part " + mainChannel)`
 	ws.send(":names " + mainChannel);
 	if (teamChannel != null) {
 		ws.send(":names " + teamChannel);
