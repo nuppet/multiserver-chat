@@ -1,8 +1,8 @@
 // db db     m         dMMb                     dMMb m
-// MMmMM     M  m      M                        M    M        m
-// M Y M m m M dMb mmm YMMb mmm Mmm m m mmm Mmm M    Mmm mmm dMb
-// M   M M M M  M   M     M Mm  M   M M Mm  M   M    M M MmM  M
-// M   M MMM M  M  mMm dMMP Mmm M    M  Mmm M   YMMP M M M M  M
+// M\m/M     M  m      M                        M    M        m
+// M V M m m M mMm mmm YMMb mmm Mmm m m mmm Mmm M    Mmm mmm mMm
+// M   M M M M  M   M     M Mw  M   M M Mw  M   M    M M MwM  M
+// M   M MmM M  M  mMm dmmP Mmm M    M  Mmm M   YmmP M M M M  M
 
 bouncerServer = "ws://100.115.92.2:9595"
 discordChannel = "#in-game-related"
